@@ -1,0 +1,33 @@
+version: '2.1'
+
+services:
+  frontend:
+    build: frontend
+    depends_on:
+      - backend
+    ports:
+      - 3000:3000
+
+  backend:
+    build: backend
+    depends_on:
+      - postgres
+    ports:
+      - 8080:8080
+    environment:
+      PORT: 8080
+      DB_HOST: localhost
+      DB_PORT: 5432
+      DB_DATABASE: lanh
+      DB_USERNAME: admin
+      DB_PASSWORD: admin
+
+  postgres:
+    image: postgres:latest
+    restart: always
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_DB: lanh
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
