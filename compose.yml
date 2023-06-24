@@ -7,7 +7,9 @@ services:
       - backend
     ports:
       - 3000:3000
-
+    environment:
+      REACT_APP_PUBLISHED_BACKEND_PORT: backend:8080
+ 
   backend:
     build: backend
     depends_on:
@@ -16,7 +18,7 @@ services:
       - 8080:8080
     environment:
       PORT: 8080
-      DB_HOST: localhost
+      DB_HOST: postgres
       DB_PORT: 5432
       DB_DATABASE: lanh
       DB_USERNAME: admin
@@ -29,5 +31,6 @@ services:
       - 5432:5432
     environment:
       POSTGRES_DB: lanh
+      # POSTGRES_HOST: db_host
       POSTGRES_USER: admin
       POSTGRES_PASSWORD: admin
